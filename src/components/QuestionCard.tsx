@@ -100,11 +100,19 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
 
   const cardStyle = {
     transform: isDragging 
-      ? `translate(${dragOffset.x}px, ${dragOffset.y}px)` 
+      ? `rotate(${dragOffset.x * 0.1}deg) translate(${dragOffset.x * 0.3}px, ${dragOffset.y * 0.4}px)` 
       : "none",
     cursor: isDragging ? "grabbing" : "grab",
     transition: isDragging ? "none" : "transform 0.3s ease",
     minHeight: "400px",
+    transformOrigin: "center",
+    backgroundColor: isDragging 
+      ? dragOffset.x > 50 
+        ? `rgba(34, 197, 94, ${Math.min(Math.abs(dragOffset.x) / 200, 0.1)})` // Vert pour "oui"
+        : dragOffset.x < -50 
+          ? `rgba(239, 68, 68, ${Math.min(Math.abs(dragOffset.x) / 200, 0.1)})` // Rouge pour "non"
+          : "white"
+      : "white",
   };
 
   return (

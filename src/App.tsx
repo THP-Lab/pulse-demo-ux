@@ -137,7 +137,10 @@ function App() {
     <div className="min-h-screen from-indigo-50 to-purple-50">
       <div className="container mx-auto px-4 py-8">
         <header className="text-center mb-8">
-          <h1 className="text-5xl font-bold text-gray-800 mb-2">Pulsy</h1>
+          <div className="flex items-center justify-center gap-3 mb-2">
+            <img src="./public/logo.png" alt="Pulse Logo" className="w-8 h-8" />
+            <h1 className="text-5xl font-bold text-gray-800">Pulse</h1>
+          </div>
           <p className="text-lg text-gray-600">Answer referendum questions and see the results!</p>
         </header>
 
