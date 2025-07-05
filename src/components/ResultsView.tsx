@@ -15,7 +15,6 @@ interface ResultsViewProps {
 }
 
 const ResultsView: React.FC<ResultsViewProps> = ({ 
-  voteStats, 
   selectedQuestions, 
   getVoteForQuestion, 
   onRestart 
@@ -29,20 +28,7 @@ const ResultsView: React.FC<ResultsViewProps> = ({
         </header>
 
         <div className="max-w-6xl mx-auto">
-          {/* Vote Summary */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Global Results</h2>
-                          <div className="grid grid-cols-2 gap-6">
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-green-600 mb-2">{voteStats.like}%</div>
-                  <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">Yes</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-red-600 mb-2">{voteStats.dislike}%</div>
-                  <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">No</div>
-                </div>
-              </div>
-          </div>
+
 
           {/* Question Review */}
           <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
