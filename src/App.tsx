@@ -141,14 +141,11 @@ function App() {
             <img src="/logo.png" alt="Pulse Logo" className="w-16" />
             <h1 className="text-5xl font-bold text-gray-800">Pulse</h1>
           </div>
-          <p className="text-lg text-gray-600">Answer referendum questions and see the results!</p>
+          <p className="text-lg text-gray-600">Get a Pulse for the Ethereum Application roadmap</p>
         </header>
 
         <main className="max-w-2xl mx-auto">
           <div className="mb-6">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4 text-center">
-              Question {currentQuestionIndex + 1} of 5
-            </h2>
             <ProgressBar current={currentQuestionIndex + 1} total={5} />
           </div>
 
@@ -160,7 +157,7 @@ function App() {
         </main>
 
         <footer className="text-center mt-8">
-          <p className="text-sm text-gray-500">Choose your answer using the buttons above or swipe the card</p>
+          <p className="text-sm text-gray-500">Swipe the card to give your pulse</p>
         </footer>
       </div>
     </div>

@@ -16,9 +16,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const [startPos, setStartPos] = useState({ x: 0, y: 0 });
-  const [isAnimatingNo, setIsAnimatingNo] = useState(false);
-  const [isAnimatingYes, setIsAnimatingYes] = useState(false);
-  const [activeVote, setActiveVote] = useState<"like" | "dislike" | null>(null);
+
   const cardRef = useRef<HTMLDivElement>(null);
 
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -81,22 +79,6 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
     return () => document.removeEventListener("mouseup", handleGlobalMouseUp);
   }, [isDragging]);
 
-  const handleVote = (type: "like" | "dislike") => {
-    setActiveVote(type);
-    
-    if (type === "dislike") {
-      setIsAnimatingNo(true);
-      setTimeout(() => setIsAnimatingNo(false), 200);
-    } else {
-      setIsAnimatingYes(true);
-      setTimeout(() => setIsAnimatingYes(false), 200);
-    }
-    
-    setTimeout(() => {
-      onVote(type);
-      setActiveVote(null);
-    }, 200);
-  };
 
   const cardStyle = {
     transform: isDragging 
@@ -104,7 +86,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
       : "none",
     cursor: isDragging ? "grabbing" : "grab",
     transition: isDragging ? "none" : "transform 0.3s ease",
-    minHeight: "400px",
+    minHeight: "250px",
     transformOrigin: "center",
     backgroundColor: isDragging 
       ? dragOffset.x > 50 
@@ -120,7 +102,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
       {/* Carte principale */}
       <div 
         ref={cardRef}
-        className="bg-white rounded-2xl shadow-lg p-6 md:p-8 w-full max-w-2xl mx-auto flex flex-col"
+        className="bg-white rounded-2xl shadow-lg p-4 md:p-6 w-full max-w-2xl mx-auto flex flex-col"
         style={cardStyle}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
@@ -139,37 +121,15 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
         </div>
       </div>
 
-      {/* Boutons de vote - même largeur que la carte */}
-      <div className="flex flex-col sm:flex-row gap-3 justify-center w-full max-w-2xl mt-6">
-        <div className={`transition-transform duration-200 ${isAnimatingNo ? "scale-95" : "scale-100"} w-full`}>
-          <Button
-            onClick={() => handleVote("dislike")}
-            variant={activeVote === "dislike" ? "default" : "outline"}
-            size="lg"
-            className={`w-full py-4 text-lg ${
-              activeVote === "dislike" 
-                ? "bg-red-500 text-white hover:bg-red-600 border-red-500" 
-                : "border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300"
-            }`}
-          >
-            👎 No
-          </Button>
-        </div>
-    
-        <div className={`transition-transform duration-200 ${isAnimatingYes ? "scale-95" : "scale-100"} w-full`}>
-          <Button
-            onClick={() => handleVote("like")}
-            variant={activeVote === "like" ? "default" : "outline"}
-            size="lg"
-            className={`w-full py-4 text-lg ${
-              activeVote === "like" 
-                ? "bg-green-500 text-white hover:bg-green-600 border-green-500" 
-                : "border-green-200 text-green-600 hover:bg-green-50 hover:border-green-300"
-            }`}
-          >
-            👍 Yes
-          </Button>
-        </div>
+      {/* Skip button - same width as the card */}
+      <div className="flex justify-center w-full max-w-2xl mt-6">
+        <Button
+          onClick={() => onVote("dislike")}
+          size="lg"
+          className="w-full py-4 text-lg bg-black text-white hover:bg-gray-900"
+        >
+          Skip
+        </Button>
       </div>
     </div>
   );
