@@ -20,18 +20,19 @@ const ResultsView: React.FC<ResultsViewProps> = ({
   onRestart 
 }) => {
   return (
-    <div className="min-h-screen from-green-50 to-blue-50">
-      <div className="container mx-auto px-4 py-8">
-        <header className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">Pulsy</h1>
-          <p className="text-lg text-gray-600">Your Results</p>
-        </header>
-
-        <div className="max-w-6xl mx-auto">
-
+    <div className="min-h-screen from-green-50 to-blue-50 overflow-auto">
+      <div className="flex justify-center items-start w-full px-2 py-8">
+        <div className="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-6">
+          <header className="text-center mb-8">
+            <div className="flex items-center justify-center gap-3 mb-2">
+              <img src="./public/logo.png" alt="Pulse Logo" className="w-20" />
+              <h1 className="text-5xl font-bold text-gray-800">Pulse</h1>
+            </div>
+            <p className="text-lg text-gray-600">Your Results</p>
+          </header>
 
           {/* Question Review */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+          <div className="mb-8">
             <h3 className="text-xl font-semibold text-gray-800 mb-6">Your Pulse vs Community Pulse</h3>
             <div className="space-y-6">
               {selectedQuestions.map((question, index) => {
