@@ -6,6 +6,8 @@ import ErrorState from "./components/ErrorState";
 import ResultsView from "./components/ResultsView";
 import "./App.css";
 import LoadingSpinner from "./components/LoadingSpinner";
+import Logo from "./components/ui/Logo";
+import { useRef } from "react";
 
 function App() {
   const [data, setData] = useState<AppData | null>(null);
@@ -14,6 +16,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [showResults, setShowResults] = useState(false);
   const [selectedQuestions, setSelectedQuestions] = useState<Question[]>([]);
+  const [logoLoading, setLogoLoading] = useState(false);
 
   useEffect(() => {
     fetch('/questions.json')
@@ -49,6 +52,11 @@ function App() {
     };
 
     setUserVotes(prev => [...prev, newVote]);
+    setLogoLoading(false);
+    setTimeout(() => {
+      setLogoLoading(true);
+      setTimeout(() => setLogoLoading(false), 2000);
+    }, 10);
     nextQuestion();
   };
 
@@ -138,7 +146,7 @@ function App() {
       <div className="container mx-auto px-4 py-8">
         <header className="text-center mb-8">
           <div className="flex items-center justify-center gap-3 mb-2">
-            <img src="/logo.png" alt="Pulse Logo" className="w-16" />
+            <Logo className="w-16 h-auto" aria-label="Pulse Logo" loading={logoLoading} />
             <h1 className="text-5xl font-bold text-gray-800">Pulse</h1>
           </div>
           <p className="text-lg text-gray-600">Get a Pulse for the Ethereum Application roadmap</p>
